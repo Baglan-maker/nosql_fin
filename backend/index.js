@@ -3,11 +3,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config(); // если используем переменные окружения
 
+const path = require('path');
 const app = express();
 
 // Middleware для парсинга JSON и работы с CORS
 app.use(express.json());
 app.use(cors());
+
+// Отдаем статические файлы из папки frontend
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 
 // Подключение к MongoDB
 mongoose.connect('mongodb://localhost:27017/bookCatalog', {})
@@ -23,6 +28,14 @@ app.use('/api/reviews', reviewRoutes);
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
+
+const analyticsRoutes = require('./routes/analyticsRoutes');
+app.use('/api/analytics', analyticsRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));

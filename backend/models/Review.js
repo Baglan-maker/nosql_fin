@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Схема для ответа на отзыв (вложенный документ)
 const replySchema = new mongoose.Schema({
-  adminName: String,
+  responderName: String,
   comment: String,
   createdAt: { type: Date, default: Date.now }
 }, { _id: false });
@@ -24,5 +24,7 @@ const reviewSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   replies: [replySchema] // вложенные документы для ответов
 });
+
+reviewSchema.index({ createdAt: 1 }, { expireAfterSeconds: 30 });
 
 module.exports = mongoose.model('Review', reviewSchema);

@@ -70,3 +70,30 @@ exports.deleteReview = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// Добавить ответ (reply) к отзыву
+exports.addReply = async (req, res) => {
+  try {
+    const reviewId = req.params.id;
+    const { responderName, comment } = req.body; // reply данные: имя и комментарий
+    const reply = {
+      responderName,
+      comment,
+      createdAt: new Date()
+    };
+
+    // Находим отзыв по id
+    const review = await require('../models/Review').findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+    
+    // Добавляем ответ в массив replies
+    review.replies.push(reply);
+    await review.save();
+    res.json(review);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
