@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 // Отдаем статические файлы из папки frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Подключение к MongoDB
@@ -20,16 +20,16 @@ mongoose.connect('mongodb+srv://bagl203456:xTevqEP8XWPEYsG8@cluster0.jvw05.mongo
   .catch(err => console.error(err));
 
 // Подключаем маршруты
-const bookRoutes = require('../routes/bookRoutes');
+const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
-const reviewRoutes = require('../routes/reviewRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 app.use('/api/reviews', reviewRoutes);
 
-const userRoutes = require('../routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
-const analyticsRoutes = require('../routes/analyticsRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 app.use('/api/analytics', analyticsRoutes);
 
 app.get('*', (req, res) => {

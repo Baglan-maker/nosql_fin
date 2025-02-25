@@ -20,7 +20,7 @@ router.post('/register', [
     }
     next();
   }, userController.createUser);
-  
+
 // Вход пользователя
 router.post('/login', userController.loginUser);
 
