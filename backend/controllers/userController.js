@@ -51,7 +51,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Неверный email или пароль' });
     }
     
-    const token = jwt.sign({ id: user._id, role: user.role  }, JWT_SECRET, { expiresIn: '0.1m' });
+    const token = jwt.sign({ id: user._id, role: user.role  }, JWT_SECRET, { expiresIn: '2m' });
     
     res.json({ token, user });
     
