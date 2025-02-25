@@ -11,10 +11,7 @@ exports.createUser = async (req, res) => {
     const { name, email, password, addresses } = req.body;
     
     // Проверяем, существует ли уже пользователь с таким email
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Пользователь с таким email уже существует' });
-    }
+  
     
     // Хэширование пароля
     const salt = await bcrypt.genSalt(10);
