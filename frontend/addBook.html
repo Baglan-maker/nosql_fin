@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Book</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Add New Book</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="addBook.html">Add Book</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <form id="addBookForm">
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" required>
+      <br>
+      <label for="author">Author:</label>
+      <input type="text" name="author" id="author" required>
+      <br>
+      <label for="genre">Genre:</label>
+        <select id="genre-add">
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Romance">Romance</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="Mystery">Mystery</option>
+        </select>
+      <br>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price" required>
+      <br>
+      <label for="publishedYear">Published Year:</label>
+      <input type="number" name="publishedYear" id="publishedYear">
+      <br>
+      <label for="description">Description:</label>
+      <textarea name="description" id="description"></textarea>
+      <br>
+      <button type="submit">Add Book</button>
+    </form>
+  </main>
+  <script type="module" src="js/addBook.js"></script>
+</body>
+</html>

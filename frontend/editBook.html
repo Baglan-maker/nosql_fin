@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Edit Book</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="addBook.html">Add Book</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+  <main>
+    <form id="editBookForm">
+      <!-- Скрытое поле для ID книги -->
+      <input type="hidden" id="bookId">
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" required>
+      <br>
+      <label for="author">Author:</label>
+      <input type="text" name="author" id="author" required>
+      <br>
+      <label for="genre">Genre:</label>
+      <input type="text" name="genre" id="genre" required>
+      <br>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price" required>
+      <br>
+      <label for="publishedYear">Published Year:</label>
+      <input type="number" name="publishedYear" id="publishedYear">
+      <br>
+      <label for="description">Description:</label>
+      <textarea name="description" id="description"></textarea>
+      <br>
+      <button type="submit">Update Book</button>
+    </form>
+  </main>
+  <script type="module" src="js/editBook.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics - Books Catalog</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Analytics</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="addBook.html">Add Book</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <!-- Аналитика по жанрам -->
+    <section id="genreAnalytics">
+      <h2>Genre Analytics</h2>
+      <div id="genreResults">
+        <!-- Результаты аналитики по жанрам будут загружены сюда -->
+      </div>
+    </section>
+
+    <!-- Книги с отзывами -->
+    <section id="booksWithReviews">
+      <h2>Books with Reviews</h2>
+      <div id="booksReviewsResults">
+        <!-- Результаты аналитики по книгам с отзывами будут загружены сюда -->
+      </div>
+    </section>
+
+    <!-- Средний рейтинг по книгам -->
+    <section id="averageRating">
+      <h2>Average Rating Per Book</h2>
+      <div id="averageRatingResults">
+        <!-- Результаты аналитики по среднему рейтингу будут загружены сюда -->
+      </div>
+    </section>
+  </main>
+  <script type="module" src="js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Стили для сообщения об ошибке */
+    #errorMessage {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+      display: none;
+    }
+    .password-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .toggle-password {
+      position: absolute;
+      right: -560px;
+      top: 50%;
+      transform: translateY(-70%);
+      cursor: pointer;
+      user-select: none;
+    }
+    #password {
+      width: 420%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Login</h1>
+    <nav>
+      <a href="register.html">Register</a>
+    </nav>
+  </header>
+  <main>
+    <div id="errorMessage"></div>
+    <form id="loginForm">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+      <br>
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input type="password" name="password" id="password" required>
+        <span id="togglePasswordLogin" class="toggle-password">👁</span>
+      </div>
+      <br>
+      <button type="submit">Login</button>
+    </form>
+  </main>
+  <script src="js/login.js"></script>
+  <script>
+    // Функция для получения параметров из URL
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+    // Если параметр error равен tokenExpired, показать сообщение
+    const errorParam = getQueryParam('error');
+    if (errorParam === 'tokenExpired') {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = 'Token expired. Log in again';
+      errorDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

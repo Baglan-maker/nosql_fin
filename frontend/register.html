@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Дополнительные стили для обёртки пароля */
+    .password-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .toggle-password {
+      position: absolute;
+      right: -560px;
+      top: 50%;
+      transform: translateY(-70%);
+      cursor: pointer;
+      user-select: none;
+    }
+    .error-message {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+    }
+    #password {
+      width: 420%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Register</h1>
+    <nav>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+  <main>
+    <div id="registerError" class="error-message" style="display:none;"></div>
+
+    <form id="registerForm">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+      <br>
+      
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+      <br>
+      
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input type="password" name="password" id="password" required>
+        <span id="togglePassword" class="toggle-password">👁</span>
+      </div>
+      <div id="passwordError" class="error-message" style="display: none;"></div>
+      <br>
+      
+      <!-- Блок для добавления адресов -->
+      <fieldset>
+        <legend>Addresses</legend>
+        <div id="addressesContainer">
+          <!-- Здесь будут добавляться адресные блоки -->
+        </div>
+        <button type="button" id="addAddressButton">Add Address</button>
+      </fieldset>
+      <br>
+      <button type="submit">Register</button>
+    </form>
+  </main>
+  <script src="js/register.js"></script>
+</body>
+</html>
