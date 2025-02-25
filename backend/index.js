@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 
 // Подключение к MongoDB
-mongoose.connect('mongodb+srv://bagl203456:xTevqEP8XWPEYsG8@cluster0.jvw05.mongodb.net/bookCatalog', {})
+mongoose.connect('mongodb+srv://bagl203456:xTevqEP8XWPEYsG8@cluster0.jvw05.mongodb.net/bookCatalog', {serverSelectionTimeoutMS: 30000})
   .then(() => console.log('MongoDB подключена'))
   .catch(err => console.error(err));
 
