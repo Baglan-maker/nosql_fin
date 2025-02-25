@@ -11,7 +11,7 @@ document.getElementById('addBookForm').addEventListener('submit', function(e) {
       description: document.getElementById('description').value
     };
     
-    checkAuthFetch('http://localhost:5000/api/books', {
+    checkAuthFetch(`${location.origin}/api/books`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(formData)

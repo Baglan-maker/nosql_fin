@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const bookId = params.get('id');
     if (bookId) {
-      checkAuthFetch(`http://localhost:5000/api/books/${bookId}`, {
+      checkAuthFetch(`${location.origin}/api/books/${bookId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: document.getElementById('description').value
     };
     
-    checkAuthFetch(`http://localhost:5000/api/books/${bookId}`, {
+    checkAuthFetch(`${location.origin}/api/books/${bookId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(updatedData)

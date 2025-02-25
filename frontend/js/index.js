@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Функция для загрузки книг с учётом параметров
   function fetchBooks(searchQuery = '', filters = {}, sort = {}) {
-    let url = 'http://localhost:5000/api/books';
+    let url = `${location.origin}/api/books`;
     let params = new URLSearchParams();
   
     if (searchQuery) {
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function deleteBook(id) {
     if (confirm('Are you sure you want to delete this book?')) {
-      fetch(`http://localhost:5000/api/books/${id}`, {
+      fetch(`${location.origin}/api/books/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

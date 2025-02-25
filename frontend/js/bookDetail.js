@@ -21,7 +21,7 @@ function getQueryParam(param) {
   
   // Загрузка деталей книги
   function loadBookDetails() {
-    checkAuthFetch(`http://localhost:5000/api/books/${bookId}`, {
+    checkAuthFetch(`${location.origin}/api/books/${bookId}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -43,7 +43,7 @@ function getQueryParam(param) {
   
   // Загрузка отзывов для книги
   function loadReviews() {
-    checkAuthFetch(`http://localhost:5000/api/reviews/book/${bookId}`, {
+    checkAuthFetch(`${location.origin}/api/reviews/book/${bookId}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -126,7 +126,7 @@ function getQueryParam(param) {
   
   // Функция для отправки нового ответа (reply) к отзыву
   function addReply(reviewId, responderName, replyComment) {
-    checkAuthFetch(`http://localhost:5000/api/reviews/${reviewId}/reply`, {
+    checkAuthFetch(`${location.origin}/api/reviews/${reviewId}/reply`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ function getQueryParam(param) {
   
       const reviewData = { bookId, userId, userName, comment, rating };
   
-      checkAuthFetch('http://localhost:5000/api/reviews', {
+      checkAuthFetch(`${location.origin}/api/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData)

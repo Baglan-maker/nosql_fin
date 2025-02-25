@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Загружает данные профиля с сервера
   function loadUserProfile() {
-    fetch('http://localhost:5000/api/users/profile', {
+    fetch(`${location.origin}/api/users/profile`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updatedData.addresses.push({ street, city, state, zip });
     });
   
-    fetch('http://localhost:5000/api/users/profile', {
+    fetch(`${location.origin}/api/users/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

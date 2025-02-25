@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 1. Получение аналитики по жанрам (группировка по жанрам, количество и средняя цена)
   function fetchGenreAnalytics() {
-    checkAuthFetch('http://localhost:5000/api/analytics/genre', {
+    checkAuthFetch(`${location.origin}/api/analytics/genre`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 2. Получение аналитики "Books with Reviews" с использованием $lookup
   function fetchBooksWithReviews() {
-    checkAuthFetch('http://localhost:5000/api/analytics/books-with-reviews', {
+    checkAuthFetch(`${location.origin}/api/analytics/books-with-reviews`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 3. Получение среднего рейтинга для каждой книги
   function fetchAverageRating() {
-    checkAuthFetch('http://localhost:5000/api/analytics/average-rating', {
+    checkAuthFetch(`${location.origin}/api/analytics/average-rating`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
