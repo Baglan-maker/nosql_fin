@@ -40,7 +40,6 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    // Поиск пользователя по email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Неверный email или пароль' });
@@ -52,8 +51,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Неверный email или пароль' });
     }
     
-    // Создаем JWT-токен (срок действия 1 час)
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, role: user.role  }, JWT_SECRET, { expiresIn: '0.1m' });
     
     res.json({ token, user });
     
@@ -125,6 +123,31 @@ exports.deleteUser = async (req, res) => {
     await user.remove();
     res.json({ message: 'Пользователь удален' });
     
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Получение профиля залогиненного пользователя
+exports.getProfile = async (req, res) => {
+  try {
+    // req.user должен содержать id пользователя, полученный из токена
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Обновление профиля залогиненного пользователя
+exports.updateProfile = async (req, res) => {
+  try {
+    // Обновляем пользователя по id, извлеченному из req.user
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, { new: true });
+    res.json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
