@@ -1,3 +1,11 @@
+document.getElementById('togglePasswordLogin').addEventListener('click', function () {
+  const passwordField = document.getElementById('password');
+  const currentType = passwordField.getAttribute('type');
+  const newType = currentType === 'password' ? 'text' : 'password';
+  passwordField.setAttribute('type', newType);
+  this.textContent = newType === 'password' ? '👁' : '👁‍🗨';
+});
+
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     

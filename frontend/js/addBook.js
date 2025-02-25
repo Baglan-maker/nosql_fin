@@ -1,3 +1,5 @@
+import { checkAuthFetch } from './utils.js';
+
 document.getElementById('addBookForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = {
@@ -9,9 +11,9 @@ document.getElementById('addBookForm').addEventListener('submit', function(e) {
       description: document.getElementById('description').value
     };
     
-    fetch('http://localhost:5000/api/books', {
+    checkAuthFetch('http://localhost:5000/api/books', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(formData)
     })
     .then(response => response.json())

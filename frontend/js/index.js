@@ -105,8 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function deleteBook(id) {
     if (confirm('Are you sure you want to delete this book?')) {
-      fetch(`http://localhost:5000/api/books/${id}`, { method: 'DELETE' })
-        .then(response => response.json())
+      fetch(`http://localhost:5000/api/books/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })           .then(response => response.json())
         .then(data => {
           if (data.message === 'Книга удалена') {
             applyFiltersAndSearch();

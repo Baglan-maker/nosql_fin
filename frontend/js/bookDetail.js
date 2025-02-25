@@ -1,3 +1,5 @@
+import { checkAuthFetch } from './utils.js';
+
 // Функция для получения параметров URL
 function getQueryParam(param) {
     const params = new URLSearchParams(window.location.search);
@@ -19,9 +21,13 @@ function getQueryParam(param) {
   
   // Загрузка деталей книги
   function loadBookDetails() {
-    fetch(`http://localhost:5000/api/books/${bookId}`)
-      .then(res => res.json())
-      .then(book => {
+    checkAuthFetch(`http://localhost:5000/api/books/${bookId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => res.json())
+        .then(book => {
         const bookInfo = document.getElementById('bookInfo');
         bookInfo.innerHTML = `
           <h2>${book.title}</h2>
@@ -37,8 +43,12 @@ function getQueryParam(param) {
   
   // Загрузка отзывов для книги
   function loadReviews() {
-    fetch(`http://localhost:5000/api/reviews/book/${bookId}`)
-      .then(res => res.json())
+    checkAuthFetch(`http://localhost:5000/api/reviews/book/${bookId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => res.json())
       .then(reviews => {
         const reviewsList = document.getElementById('reviewsList');
         reviewsList.innerHTML = '';
@@ -116,7 +126,7 @@ function getQueryParam(param) {
   
   // Функция для отправки нового ответа (reply) к отзыву
   function addReply(reviewId, responderName, replyComment) {
-    fetch(`http://localhost:5000/api/reviews/${reviewId}/reply`, {
+    checkAuthFetch(`http://localhost:5000/api/reviews/${reviewId}/reply`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -124,8 +134,8 @@ function getQueryParam(param) {
       },
       body: JSON.stringify({ responderName, comment: replyComment })
     })
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+        .then(data => {
         alert('Reply added successfully!');
         loadReviews(); // обновляем список отзывов
       })
@@ -169,13 +179,13 @@ function getQueryParam(param) {
   
       const reviewData = { bookId, userId, userName, comment, rating };
   
-      fetch('http://localhost:5000/api/reviews', {
+      checkAuthFetch('http://localhost:5000/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData)
       })
-        .then(res => res.json())
-        .then(data => {
+      .then(res => res.json())
+              .then(data => {
           alert('Review submitted successfully!');
           reviewForm.reset();
           loadReviews();
